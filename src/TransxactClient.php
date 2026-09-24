@@ -50,8 +50,8 @@ class TransxactClient
         $defaultHeaders = [
             'X-Fern-Language' => 'PHP',
             'X-Fern-SDK-Name' => 'Transxact',
-            'X-Fern-SDK-Version' => '0.1.0',
-            'User-Agent' => 'transxact/transxact/0.1.0',
+            'X-Fern-SDK-Version' => '0.1.1',
+            'User-Agent' => 'transxact/transxact/0.1.1',
         ];
 
         $this->options = $options ?? [];
