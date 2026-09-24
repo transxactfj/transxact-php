@@ -6,4 +6,4 @@ The one hand-written exception: `Webhooks::verifySignature()` (`src/Webhooks.php
 
 Retry/backoff behavior is Fern generator config, not source here — change it in the Fern project config in `transxactfj/transxact`, not in this repo.
 
-To regenerate: from `transxactfj/transxact`, run `fern generate --group php` inside `fern/` (requires `FERN_TOKEN`; the actual push goes through the Fern GitHub App installed on this repo).
+To regenerate: run the "Generate SDKs" workflow (`.github/workflows/sdk-generate.yml`) in `transxactfj/transxact`, group `php`, with the semver to release — it runs `fern generate --group php --version <semver>`, which commits and tags `v<semver>` (Packagist then picks the tag up via its update webhook, once the repo has been submitted there). (Equivalent local command: `fern generate --group php --version <semver>` inside `fern/`, requires `FERN_TOKEN`.)
