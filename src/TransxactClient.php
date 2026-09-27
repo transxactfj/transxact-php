@@ -50,8 +50,8 @@ class TransxactClient
         $defaultHeaders = [
             'X-Fern-Language' => 'PHP',
             'X-Fern-SDK-Name' => 'Transxact',
-            'X-Fern-SDK-Version' => '0.2.31',
-            'User-Agent' => 'transxact/transxact/0.2.31',
+            'X-Fern-SDK-Version' => '0.2.32',
+            'User-Agent' => 'transxact/transxact/0.2.32',
         ];
 
         $this->options = $options ?? [];
@@ -157,6 +157,59 @@ class TransxactClient
                     baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? '',
                     path: "v1/checkout-sessions/{$id}",
                     method: HttpMethod::GET,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return CheckoutSession::fromJson($json);
+            }
+        } catch (JsonException $e) {
+            throw new TransxactException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new TransxactException(message: $e->getMessage(), previous: $e);
+        }
+        throw new TransxactApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+
+    /**
+     * Example:
+     * ```php
+     * $client->postV1CheckoutSessionsIdCancel(
+     *     'cs_3f9c2b1a',
+     * );
+     * ```
+     *
+     * @param string $id Checkout Session identifier.
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return ?CheckoutSession
+     * @throws TransxactException
+     * @throws TransxactApiException
+     */
+    public function postV1CheckoutSessionsIdCancel(string $id, ?array $options = null): ?CheckoutSession
+    {
+        $options = array_merge($this->options, $options ?? []);
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? '',
+                    path: "v1/checkout-sessions/{$id}/cancel",
+                    method: HttpMethod::POST,
                 ),
                 $options,
             );

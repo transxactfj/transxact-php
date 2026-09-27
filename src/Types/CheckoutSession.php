@@ -4,6 +4,7 @@ namespace Transxact\Types;
 
 use Transxact\Core\Json\JsonSerializableType;
 use Transxact\Core\Json\JsonProperty;
+use Transxact\Core\Types\ArrayType;
 
 class CheckoutSession extends JsonSerializableType
 {
@@ -38,12 +39,26 @@ class CheckoutSession extends JsonSerializableType
     public string $hostedUrl;
 
     /**
+     * @var array<string, string> $metadata Your own key/value data from creation; empty object if none was set.
+     */
+    #[JsonProperty('metadata'), ArrayType(['string' => 'string'])]
+    public array $metadata;
+
+    /**
+     * @var int $expiresAt Unix ms timestamp after which no payment can start; a still-pending session is then cancelled.
+     */
+    #[JsonProperty('expiresAt')]
+    public int $expiresAt;
+
+    /**
      * @param array{
      *   id: string,
      *   status: value-of<CheckoutSessionStatus>,
      *   amount: int,
      *   currency: value-of<CheckoutSessionCurrency>,
      *   hostedUrl: string,
+     *   metadata: array<string, string>,
+     *   expiresAt: int,
      * } $values
      */
     public function __construct(
@@ -54,6 +69,8 @@ class CheckoutSession extends JsonSerializableType
         $this->amount = $values['amount'];
         $this->currency = $values['currency'];
         $this->hostedUrl = $values['hostedUrl'];
+        $this->metadata = $values['metadata'];
+        $this->expiresAt = $values['expiresAt'];
     }
 
     /**
