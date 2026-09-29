@@ -41,7 +41,7 @@ $client->postV1CheckoutSessions(
 <dl>
 <dd>
 
-**$amount:** `int` — Amount to charge, in FJD cents (minor units).
+**$amount:** `int` — Amount to charge, in FJD cents (minor units). Must be under FJD 5,000.00 (at most 499999), in Test mode and Live mode alike.
     
 </dd>
 </dl>

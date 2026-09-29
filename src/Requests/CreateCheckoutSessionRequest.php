@@ -15,7 +15,7 @@ class CreateCheckoutSessionRequest extends JsonSerializableType
     public string $idempotencyKey;
 
     /**
-     * @var int $amount Amount to charge, in FJD cents (minor units).
+     * @var int $amount Amount to charge, in FJD cents (minor units). Must be under FJD 5,000.00 (at most 499999), in Test mode and Live mode alike.
      */
     #[JsonProperty('amount')]
     public int $amount;

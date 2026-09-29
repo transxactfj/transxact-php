@@ -26,10 +26,17 @@ class Merchant extends JsonSerializableType
     public int $balance;
 
     /**
+     * @var value-of<MerchantPayoutSchedule> $payoutSchedule When Payouts are made, in UTC: `daily`; `weekly` on Mondays (the default); `fortnightly` on every other Monday; `monthly` on the 1st; or `manual`, where a Payout is made only when the Merchant asks for one from the dashboard. Set on the dashboard.
+     */
+    #[JsonProperty('payoutSchedule')]
+    public string $payoutSchedule;
+
+    /**
      * @param array{
      *   tier: value-of<MerchantTier>,
      *   mode: value-of<MerchantMode>,
      *   balance: int,
+     *   payoutSchedule: value-of<MerchantPayoutSchedule>,
      * } $values
      */
     public function __construct(
@@ -38,6 +45,7 @@ class Merchant extends JsonSerializableType
         $this->tier = $values['tier'];
         $this->mode = $values['mode'];
         $this->balance = $values['balance'];
+        $this->payoutSchedule = $values['payoutSchedule'];
     }
 
     /**
