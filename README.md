@@ -40,7 +40,9 @@ use Transxact\TransxactClient;
 use Transxact\Requests\CreateCheckoutSessionRequest;
 use Transxact\Types\CreateCheckoutSessionRequestCurrency;
 
-$client = new TransxactClient();
+$client = new TransxactClient(
+    token: '<token>',
+);
 $client->postV1CheckoutSessions(
     new CreateCheckoutSessionRequest([
         'idempotencyKey' => 'a1b2c3d4-order-9912',

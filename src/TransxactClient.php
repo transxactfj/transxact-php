@@ -36,6 +36,7 @@ class TransxactClient
     private RawClient $client;
 
     /**
+     * @param string $token The token to use for authentication.
      * @param ?array{
      *   baseUrl?: string,
      *   client?: ClientInterface,
@@ -45,13 +46,15 @@ class TransxactClient
      * } $options
      */
     public function __construct(
+        string $token,
         ?array $options = null,
     ) {
         $defaultHeaders = [
+            'Authorization' => "Bearer $token",
             'X-Fern-Language' => 'PHP',
             'X-Fern-SDK-Name' => 'Transxact',
-            'X-Fern-SDK-Version' => '0.4.35',
-            'User-Agent' => 'transxact/transxact/0.4.35',
+            'X-Fern-SDK-Version' => '0.4.36',
+            'User-Agent' => 'transxact/transxact/0.4.36',
         ];
 
         $this->options = $options ?? [];
