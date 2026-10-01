@@ -10,6 +10,7 @@ The Transxact PHP library provides convenient access to the Transxact APIs from 
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Environments](#environments)
 - [Exception Handling](#exception-handling)
 - [Advanced](#advanced)
   - [Custom Client](#custom-client)
@@ -37,13 +38,13 @@ Instantiate and use the client with the following:
 namespace Example;
 
 use Transxact\TransxactClient;
-use Transxact\Requests\CreateCheckoutSessionRequest;
-use Transxact\Types\CreateCheckoutSessionRequestCurrency;
+use Transxact\CheckoutSessions\Requests\CreateCheckoutSessionRequest;
+use Transxact\CheckoutSessions\Types\CreateCheckoutSessionRequestCurrency;
 
 $client = new TransxactClient(
     token: '<token>',
 );
-$client->postV1CheckoutSessions(
+$client->checkoutSessions->create(
     new CreateCheckoutSessionRequest([
         'idempotencyKey' => 'a1b2c3d4-order-9912',
         'amount' => 5000,
@@ -51,6 +52,29 @@ $client->postV1CheckoutSessions(
     ]),
 );
 
+```
+
+## Environments
+
+This SDK allows you to configure different environments for API requests.
+
+```php
+The SDK defaults to the `Production` environment. To use a different environment, pass it to the client constructor:
+
+```php
+use Transxact\TransxactClient;
+use Transxact\Environments;
+
+$client = new TransxactClient(
+    token: '<YOUR_TOKEN>',
+    options: [
+        'baseUrl' => Environments::Staging->value
+    ]
+);
+```
+
+Available environments:
+- `Environments::Production`
 ```
 
 ## Exception Handling
@@ -62,7 +86,7 @@ use Transxact\Exceptions\TransxactApiException;
 use Transxact\Exceptions\TransxactException;
 
 try {
-    $response = $client->postV1CheckoutSessions(...);
+    $response = $client->checkoutSessions->create(...);
 } catch (TransxactApiException $e) {
     echo 'API Exception occurred: ' . $e->getMessage() . "\n";
     echo 'Status Code: ' . $e->getCode() . "\n";
@@ -121,7 +145,7 @@ The `retryStatusCodes` configuration controls which [5XX](https://developer.mozi
 Use the `maxRetries` request option to configure this behavior.
 
 ```php
-$response = $client->postV1CheckoutSessions(
+$response = $client->checkoutSessions->create(
     ...,
     options: [
         'maxRetries' => 0 // Override maxRetries at the request level
@@ -134,7 +158,7 @@ $response = $client->postV1CheckoutSessions(
 The SDK defaults to a 30 second timeout. Use the `timeout` option to configure this behavior.
 
 ```php
-$response = $client->postV1CheckoutSessions(
+$response = $client->checkoutSessions->create(
     ...,
     options: [
         'timeout' => 3.0 // Override timeout at the request level

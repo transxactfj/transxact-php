@@ -1,5 +1,6 @@
 # Reference
-<details><summary><code>$client-&gt;postV1CheckoutSessions($request) -> ?CheckoutSession</code></summary>
+## CheckoutSessions
+<details><summary><code>$client-&gt;checkoutSessions-&gt;create($request) -> ?CheckoutSession</code></summary>
 <dl>
 <dd>
 
@@ -12,7 +13,7 @@
 <dd>
 
 ```php
-$client->postV1CheckoutSessions(
+$client->checkoutSessions->create(
     new CreateCheckoutSessionRequest([
         'idempotencyKey' => 'a1b2c3d4-order-9912',
         'amount' => 5000,
@@ -93,7 +94,7 @@ $client->postV1CheckoutSessions(
 </dl>
 </details>
 
-<details><summary><code>$client-&gt;getV1CheckoutSessionsId($id) -> ?CheckoutSession</code></summary>
+<details><summary><code>$client-&gt;checkoutSessions-&gt;retrieve($id) -> ?CheckoutSession</code></summary>
 <dl>
 <dd>
 
@@ -106,7 +107,7 @@ $client->postV1CheckoutSessions(
 <dd>
 
 ```php
-$client->getV1CheckoutSessionsId(
+$client->checkoutSessions->retrieve(
     'cs_3f9c2b1a',
 );
 ```
@@ -135,7 +136,7 @@ $client->getV1CheckoutSessionsId(
 </dl>
 </details>
 
-<details><summary><code>$client-&gt;postV1CheckoutSessionsIdCancel($id) -> ?CheckoutSession</code></summary>
+<details><summary><code>$client-&gt;checkoutSessions-&gt;cancel($id) -> ?CheckoutSession</code></summary>
 <dl>
 <dd>
 
@@ -148,7 +149,7 @@ $client->getV1CheckoutSessionsId(
 <dd>
 
 ```php
-$client->postV1CheckoutSessionsIdCancel(
+$client->checkoutSessions->cancel(
     'cs_3f9c2b1a',
 );
 ```
@@ -177,7 +178,8 @@ $client->postV1CheckoutSessionsIdCancel(
 </dl>
 </details>
 
-<details><summary><code>$client-&gt;getV1MerchantsMe() -> ?Merchant</code></summary>
+## Merchants
+<details><summary><code>$client-&gt;merchants-&gt;me() -> ?Merchant</code></summary>
 <dl>
 <dd>
 
@@ -190,7 +192,7 @@ $client->postV1CheckoutSessionsIdCancel(
 <dd>
 
 ```php
-$client->getV1MerchantsMe();
+$client->merchants->me();
 ```
 </dd>
 </dl>
@@ -202,7 +204,8 @@ $client->getV1MerchantsMe();
 </dl>
 </details>
 
-<details><summary><code>$client-&gt;getV1Payouts($request) -> ?GetV1PayoutsResponse</code></summary>
+## Payouts
+<details><summary><code>$client-&gt;payouts-&gt;list($request) -> ?ListPayoutsResponse</code></summary>
 <dl>
 <dd>
 
@@ -215,8 +218,8 @@ $client->getV1MerchantsMe();
 <dd>
 
 ```php
-$client->getV1Payouts(
-    new GetV1PayoutsRequest([
+$client->payouts->list(
+    new ListPayoutsRequest([
         'startingAfter' => 'po_3f9c2b1a',
         'limit' => '10',
     ]),
@@ -255,7 +258,7 @@ $client->getV1Payouts(
 </dl>
 </details>
 
-<details><summary><code>$client-&gt;getV1PayoutsId($id) -> ?Payout</code></summary>
+<details><summary><code>$client-&gt;payouts-&gt;retrieve($id) -> ?Payout</code></summary>
 <dl>
 <dd>
 
@@ -268,7 +271,7 @@ $client->getV1Payouts(
 <dd>
 
 ```php
-$client->getV1PayoutsId(
+$client->payouts->retrieve(
     'po_3f9c2b1a',
 );
 ```

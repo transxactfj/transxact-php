@@ -1,6 +1,6 @@
 <?php
 
-namespace Transxact\Types;
+namespace Transxact\CheckoutSessions\Types;
 
 enum CreateCheckoutSessionRequestCurrency: string
 {

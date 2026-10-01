@@ -1,12 +1,13 @@
 <?php
 
-namespace Transxact\Types;
+namespace Transxact\Payouts\Types;
 
 use Transxact\Core\Json\JsonSerializableType;
+use Transxact\Types\Payout;
 use Transxact\Core\Json\JsonProperty;
 use Transxact\Core\Types\ArrayType;
 
-class GetV1PayoutsResponse extends JsonSerializableType
+class ListPayoutsResponse extends JsonSerializableType
 {
     /**
      * @var array<Payout> $data

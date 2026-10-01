@@ -1,10 +1,10 @@
 <?php
 
-namespace Transxact\Requests;
+namespace Transxact\CheckoutSessions\Requests;
 
 use Transxact\Core\Json\JsonSerializableType;
 use Transxact\Core\Json\JsonProperty;
-use Transxact\Types\CreateCheckoutSessionRequestCurrency;
+use Transxact\CheckoutSessions\Types\CreateCheckoutSessionRequestCurrency;
 use Transxact\Core\Types\ArrayType;
 
 class CreateCheckoutSessionRequest extends JsonSerializableType

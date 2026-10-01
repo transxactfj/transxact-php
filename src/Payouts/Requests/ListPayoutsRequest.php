@@ -1,10 +1,10 @@
 <?php
 
-namespace Transxact\Requests;
+namespace Transxact\Payouts\Requests;
 
 use Transxact\Core\Json\JsonSerializableType;
 
-class GetV1PayoutsRequest extends JsonSerializableType
+class ListPayoutsRequest extends JsonSerializableType
 {
     /**
      * @var ?string $startingAfter Cursor: return Payouts after this id.
