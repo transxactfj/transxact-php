@@ -52,6 +52,8 @@ class PayoutsClient
     }
 
     /**
+     * Lists the Merchant's Payouts in the key's mode, oldest id first. Payouts are made on the Merchant's Payout schedule, or when the Merchant asks from the dashboard on the manual schedule; they can't be created through the API. To page, pass the last id you got as `starting_after` while `hasMore` is true.
+     *
      * Example:
      * ```php
      * $client->payouts->list(
@@ -116,6 +118,8 @@ class PayoutsClient
     }
 
     /**
+     * Returns one Payout by id: its amount, rail and status, and why it failed if it did. Payouts from the other mode or another Merchant are 404.
+     *
      * Example:
      * ```php
      * $client->payouts->retrieve(

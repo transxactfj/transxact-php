@@ -5,6 +5,9 @@ namespace Transxact\Types;
 use Transxact\Core\Json\JsonSerializableType;
 use Transxact\Core\Json\JsonProperty;
 
+/**
+ * Branch on `code`; `message` is for logs.
+ */
 class ErrorError extends JsonSerializableType
 {
     /**

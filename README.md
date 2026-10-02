@@ -3,12 +3,14 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Ftransxactfj%2Ftransxact-php)
 [![php shield](https://img.shields.io/badge/php-packagist-pink)](https://packagist.org/packages/transxact/transxact)
 
-The Transxact PHP library provides convenient access to the Transxact APIs from PHP.
+Create a Checkout Session on your server, send the Customer to its hostedUrl, and fulfil the order from a verified webhook. Quickstart: https://docs.transxact.io/guides/quickstart. Step-by-step recipe for you or your coding agent: https://docs.transxact.io/guides/integrate-with-an-ai-agent
 
 ## Table of Contents
 
+- [Documentation](#documentation)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Verifying Webhooks](#verifying-webhooks)
 - [Usage](#usage)
 - [Environments](#environments)
 - [Exception Handling](#exception-handling)
@@ -17,6 +19,10 @@ The Transxact PHP library provides convenient access to the Transxact APIs from 
   - [Retries](#retries)
   - [Timeouts](#timeouts)
 - [Contributing](#contributing)
+
+## Documentation
+
+API reference documentation is available [here](https://docs.transxact.io/api-reference).
 
 ## Requirements
 
@@ -27,6 +33,34 @@ This SDK requires PHP ^8.1.
 ```sh
 composer require transxact/transxact
 ```
+
+## Verifying webhooks
+
+Check the `Transxact-Signature` header before trusting a webhook, or anyone who can reach your endpoint can forge a payment notification. Pass the raw request body, exactly as received, not re-serialized JSON. Signatures older than 5 minutes are rejected.
+
+```php
+<?php
+
+use Transxact\Webhooks;
+
+$rawBody = file_get_contents('php://input');
+$ok = Webhooks::verifySignature(
+    $rawBody,
+    $_SERVER['HTTP_TRANSXACT_SIGNATURE'] ?? '',
+    (string) getenv('TRANSXACT_WEBHOOK_SECRET'),
+);
+if (!$ok) {
+    http_response_code(400);
+    exit;
+}
+
+$event = json_decode($rawBody, true);
+// Fulfil on $event['type'] === 'checkout_session.succeeded', skipping event ids you've already handled.
+http_response_code(200);
+```
+
+Your signing secret is in the **Webhooks** section of the dashboard. See [Verifying webhooks](https://docs.transxact.io/guides/verifying-webhooks) for retries and duplicate events.
+
 
 ## Usage
 

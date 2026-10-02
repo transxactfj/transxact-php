@@ -8,7 +8,7 @@ use Transxact\Core\Json\JsonProperty;
 class Error extends JsonSerializableType
 {
     /**
-     * @var ErrorError $error
+     * @var ErrorError $error Branch on `code`; `message` is for logs.
      */
     #[JsonProperty('error')]
     public ErrorError $error;

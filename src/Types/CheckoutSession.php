@@ -15,7 +15,7 @@ class CheckoutSession extends JsonSerializableType
     public string $id;
 
     /**
-     * @var value-of<CheckoutSessionStatus> $status Current status of the Checkout Session.
+     * @var value-of<CheckoutSessionStatus> $status `pending` until the Customer pays or the session ends. `succeeded`: paid, safe to fulfil. `failed`: the payment was declined or didn't go through. `cancelled`: you cancelled it or it expired unpaid. Only `pending` ever changes, and each change sends the matching `checkout_session.*` webhook.
      */
     #[JsonProperty('status')]
     public string $status;

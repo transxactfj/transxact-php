@@ -10,13 +10,13 @@ use Transxact\Core\Types\ArrayType;
 class ListPayoutsResponse extends JsonSerializableType
 {
     /**
-     * @var array<Payout> $data
+     * @var array<Payout> $data This page of Payouts.
      */
     #[JsonProperty('data'), ArrayType([Payout::class])]
     public array $data;
 
     /**
-     * @var bool $hasMore
+     * @var bool $hasMore True if more Payouts follow; pass the last id as `starting_after` to get them.
      */
     #[JsonProperty('hasMore')]
     public bool $hasMore;

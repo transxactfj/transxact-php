@@ -51,6 +51,8 @@ class CheckoutSessionsClient
     }
 
     /**
+     * Starts a payment: call this from your server, then redirect the Customer to the returned `hostedUrl`, which takes the payment with any Provider. Don't fulfil on the redirect; wait for the `checkout_session.succeeded` webhook or retrieve the session. The `Idempotency-Key` header is required: a retry with the same key replays the original session instead of creating a second one, so derive it from your order. An `sk_test_` key creates a Test mode session that simulates payment; an `sk_live_` key creates a Live mode session that moves real money.
+     *
      * Example:
      * ```php
      * $client->checkoutSessions->create(
@@ -112,6 +114,8 @@ class CheckoutSessionsClient
     }
 
     /**
+     * Returns a Checkout Session's current state. Use it to confirm the outcome when the Customer lands on your `successUrl` with `session_id`, or to check a webhook you missed. Only sessions created with a key of the same Merchant and mode are visible; anything else is 404.
+     *
      * Example:
      * ```php
      * $client->checkoutSessions->retrieve(
@@ -165,6 +169,8 @@ class CheckoutSessionsClient
     }
 
     /**
+     * Withdraws a `pending` Checkout Session so it can't be paid, e.g. when the order is abandoned or changed. Fails with `payment_in_progress` once the Customer has started paying; wait for the outcome webhook instead. Unpaid sessions also cancel on their own after `expiresAt`, unless the Customer has started paying.
+     *
      * Example:
      * ```php
      * $client->checkoutSessions->cancel(

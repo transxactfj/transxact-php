@@ -50,6 +50,8 @@ class MerchantsClient
     }
 
     /**
+     * Returns the Merchant that owns the API key: its tier, the key's mode, the balance not yet paid out in that mode, and the Payout schedule. A cheap way to check a key works and which mode it's in.
+     *
      * Example:
      * ```php
      * $client->merchants->me();
