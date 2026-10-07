@@ -2,10 +2,13 @@
   "cliVersion": "5.134.1",
   "generatorName": "fernapi/fern-php-sdk",
   "generatorVersion": "2.23.0",
-  "originGitCommit": "fbe6c78268f84b76feccfda53ee65f7496236dca",
+  "generatorConfig": {
+    "packageName": "transxact/transxact"
+  },
+  "originGitCommit": "e7b6df4098061801c22bcff303037f32630fabc2",
   "originGitCommitIsDirty": false,
   "invokedBy": "ci",
-  "requestedVersion": "0.4.46",
+  "requestedVersion": "0.4.47",
   "ciProvider": "github",
-  "sdkVersion": "0.4.46"
+  "sdkVersion": "0.4.47"
 }
