@@ -59,8 +59,8 @@ class TransxactClient
             'Authorization' => "Bearer $token",
             'X-Fern-Language' => 'PHP',
             'X-Fern-SDK-Name' => 'Transxact',
-            'X-Fern-SDK-Version' => '0.4.45',
-            'User-Agent' => 'transxact/transxact/0.4.45',
+            'X-Fern-SDK-Version' => '0.4.46',
+            'User-Agent' => 'transxact/transxact/0.4.46',
         ];
 
         $this->options = $options ?? [];
