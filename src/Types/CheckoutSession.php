@@ -21,6 +21,12 @@ class CheckoutSession extends JsonSerializableType
     public string $status;
 
     /**
+     * @var value-of<CheckoutSessionMode> $mode `test` for a session made with an `sk_test_` key, `live` for an `sk_live_` key. Webhook endpoints each hear one mode, and the payload says which it came from.
+     */
+    #[JsonProperty('mode')]
+    public string $mode;
+
+    /**
      * @var int $amount Amount to charge, in FJD cents (minor units).
      */
     #[JsonProperty('amount')]
@@ -54,6 +60,7 @@ class CheckoutSession extends JsonSerializableType
      * @param array{
      *   id: string,
      *   status: value-of<CheckoutSessionStatus>,
+     *   mode: value-of<CheckoutSessionMode>,
      *   amount: int,
      *   currency: value-of<CheckoutSessionCurrency>,
      *   hostedUrl: string,
@@ -66,6 +73,7 @@ class CheckoutSession extends JsonSerializableType
     ) {
         $this->id = $values['id'];
         $this->status = $values['status'];
+        $this->mode = $values['mode'];
         $this->amount = $values['amount'];
         $this->currency = $values['currency'];
         $this->hostedUrl = $values['hostedUrl'];
