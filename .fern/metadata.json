@@ -5,10 +5,10 @@
   "generatorConfig": {
     "packageName": "transxact/transxact"
   },
-  "originGitCommit": "a0c5ea85d5f4d5052365c311c9b3b845f8a6fa95",
+  "originGitCommit": "b1394888a685f09f721114747b9c239bc842af29",
   "originGitCommitIsDirty": false,
   "invokedBy": "ci",
-  "requestedVersion": "0.4.48",
+  "requestedVersion": "0.4.481",
   "ciProvider": "github",
-  "sdkVersion": "0.4.48"
+  "sdkVersion": "0.4.481"
 }
