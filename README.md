@@ -73,7 +73,6 @@ namespace Example;
 
 use Transxact\TransxactClient;
 use Transxact\CheckoutSessions\Requests\CreateCheckoutSessionRequest;
-use Transxact\CheckoutSessions\Types\CreateCheckoutSessionRequestCurrency;
 
 $client = new TransxactClient(
     token: '<token>',
@@ -81,8 +80,6 @@ $client = new TransxactClient(
 $client->checkoutSessions->create(
     new CreateCheckoutSessionRequest([
         'idempotencyKey' => 'a1b2c3d4-order-9912',
-        'amount' => 5000,
-        'currency' => CreateCheckoutSessionRequestCurrency::Fjd->value,
     ]),
 );
 

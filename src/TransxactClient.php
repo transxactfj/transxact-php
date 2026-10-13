@@ -3,6 +3,7 @@
 namespace Transxact;
 
 use Transxact\CheckoutSessions\CheckoutSessionsClient;
+use Transxact\Invoices\InvoicesClient;
 use Transxact\Merchants\MerchantsClient;
 use Transxact\Payouts\PayoutsClient;
 use Psr\Http\Client\ClientInterface;
@@ -14,6 +15,11 @@ class TransxactClient
      * @var CheckoutSessionsClient $checkoutSessions
      */
     public CheckoutSessionsClient $checkoutSessions;
+
+    /**
+     * @var InvoicesClient $invoices
+     */
+    public InvoicesClient $invoices;
 
     /**
      * @var MerchantsClient $merchants
@@ -59,8 +65,8 @@ class TransxactClient
             'Authorization' => "Bearer $token",
             'X-Fern-Language' => 'PHP',
             'X-Fern-SDK-Name' => 'Transxact',
-            'X-Fern-SDK-Version' => '0.4.483',
-            'User-Agent' => 'transxact/transxact/0.4.483',
+            'X-Fern-SDK-Version' => '0.5.11',
+            'User-Agent' => 'transxact/transxact/0.5.11',
         ];
 
         $this->options = $options ?? [];
@@ -75,6 +81,7 @@ class TransxactClient
         );
 
         $this->checkoutSessions = new CheckoutSessionsClient($this->client, $this->options);
+        $this->invoices = new InvoicesClient($this->client, $this->options);
         $this->merchants = new MerchantsClient($this->client, $this->options);
         $this->payouts = new PayoutsClient($this->client, $this->options);
     }

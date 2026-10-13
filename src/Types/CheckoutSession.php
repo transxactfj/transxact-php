@@ -57,6 +57,18 @@ class CheckoutSession extends JsonSerializableType
     public int $expiresAt;
 
     /**
+     * @var ?string $invoiceNumber The Invoice number, such as `INV-0007`, when the session pays one of your Invoices; absent otherwise. Also in the webhook payload.
+     */
+    #[JsonProperty('invoiceNumber')]
+    public ?string $invoiceNumber;
+
+    /**
+     * @var ?CheckoutSessionQuote $quote Present when you created the session with a `quote`: the USD or AUD price you sent, the FJD rate it was converted at (a decimal string), and the Unix ms time the rate was taken. `amount` is the FJD that is charged. Never shown to the Customer.
+     */
+    #[JsonProperty('quote')]
+    public ?CheckoutSessionQuote $quote;
+
+    /**
      * @param array{
      *   id: string,
      *   status: value-of<CheckoutSessionStatus>,
@@ -66,6 +78,8 @@ class CheckoutSession extends JsonSerializableType
      *   hostedUrl: string,
      *   metadata: array<string, string>,
      *   expiresAt: int,
+     *   invoiceNumber?: ?string,
+     *   quote?: ?CheckoutSessionQuote,
      * } $values
      */
     public function __construct(
@@ -79,6 +93,8 @@ class CheckoutSession extends JsonSerializableType
         $this->hostedUrl = $values['hostedUrl'];
         $this->metadata = $values['metadata'];
         $this->expiresAt = $values['expiresAt'];
+        $this->invoiceNumber = $values['invoiceNumber'] ?? null;
+        $this->quote = $values['quote'] ?? null;
     }
 
     /**
